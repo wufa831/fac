@@ -1,0 +1,47 @@
+// .bg{
+//   position: fixed;
+//   left: 0;
+//   top: 0;
+//   right: 0;
+//   bottom: 0;
+//   background-image: linear-gradient(to right,#9890e3,#b1f4cf);
+//}
+// *{
+//   padding: 0;
+//   margin: 0;
+// }
+
+
+
+.auth {
+  height: 100%;
+  background-image: linear-gradient(#ebbfd6,#7edbdc);
+
+  .title-info{
+    overflow:hidden;
+    // margin-top: 100px;
+    text-align: center;
+    margin-bottom: 32px;
+    padding-top: 22px;
+  }
+  .title{
+    font-size: 30px;
+    font-weight: bold;
+    color: rgb(29, 35, 85);;
+  }
+  .form{
+    width: 400px;
+    margin: 0 auto;
+
+   .item{
+     margin-bottom: 16px;
+
+    button{
+      width: 100%;
+    }
+   }
+  }
+}
+
+
+
