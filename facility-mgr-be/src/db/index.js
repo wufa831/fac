@@ -1,27 +1,22 @@
 const mongoose = require('mongoose');
+require('./Schemas/User');
 
-const UserSchema = new mongoose.Schema({
-  nickname: String,
-  password: String,
-  age:Number,
-});
+const connect = async () => {
+  return new Promise((resolve) => {
+    mongoose.connect('mongodb://127.0.0.1:27017/facility-mgr');
 
-const UserModal = mongoose.model('User', UserSchema);
+    mongoose.connection.on('open', () => {//数据库打开成功时提示
+      console.log('连接数据库成功');
 
-const connect = () => {
-  mongoose.connect('mongodb://127.0.0.1:27017/facility-mgr');
 
-  mongoose.connection.on('open', () => {
-    console.log('连接成功');
+      resolve();
 
-    const user = new UserModal({
-      nickname: 'xiaohong',
-      password: '123456',
-      age:12,
-    });
-    user.age = 99;
-    user.save();
   });
+  });
+
+
 };
 
-connect();
+module.exports = {
+  connect,
+};
