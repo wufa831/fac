@@ -1,11 +1,8 @@
 import { defineComponent,reactive,ref } from 'vue';
-import {
-  UserOutlined,
-  LockOutlined,
-  MailOutlined,
-} from '@ant-design/icons-vue';
-
+import {UserOutlined,LockOutlined,MailOutlined,} from '@ant-design/icons-vue';
 import { auth } from '@/service';
+import {result } from '@/helpers/utils';
+import { message } from 'ant-design-vue';
 
 // auth.register
 export default defineComponent({
@@ -16,21 +13,77 @@ export default defineComponent({
   },
 
   setup() {
-
+    //注册用表单数据
     const regForm = reactive({ //声明多个响应式数据值，创建一组数据
+      account: '',
+      password: '',
+      inviteCode:'',
+    });
+
+    //注册逻辑
+    const register = async() => {//注册方法，调用auth.register发送html请求 返回promise，带两个数据//axios
+      if (regForm.account === '') {
+        message.info('请输入账户');
+        return;
+      }
+      if (regForm.password === '') {
+        message.info('请输入密码');
+        return;
+      }
+      if (regForm.inviteCode === '') {
+        message.info('请输入邀请码');
+        return;
+      }
+
+      const res = await auth.register(
+        regForm.account,
+        regForm.password,
+        regForm.inviteCode,
+      );//解构方式拿到res.data
+      
+      result(res)
+        .success((data) => {
+          message.success(data.msg);
+        });
+      // if (data.code) {//0失败1成功
+      //   message.success(data.msg);//data.msg由服务端提供
+      //   return;
+      // }
+      // message.error(data.msg);
+      
+    };
+
+    //登入用表单数据
+    const loginForm = reactive({ //声明多个响应式数据值，创建一组数据
       account: '',
       password: '',
     });
 
-    const register = () => {//注册方法，调用auth.register发送html请求，带两个数据
-      auth.register(regForm.account, regForm.password);
-      // console.log(regForm);
+    //登入逻辑
+    const login =async () => {
+      if (loginForm.account === '') {
+        message.info('请输入账户');
+        return;
+      }
+      if (loginForm.password === '') {
+        message.info('请输入密码');
+        return;
+      }
+
+
+      const res= await auth.login(loginForm.account, loginForm.password);//解构方式拿到res.data
+      result(res)
+        .success((data) => {
+          message.success(data.msg);
+        });
     };
 
     return {//作为setup返回值返回，然后可以在模板index.vue中使用
-      regForm,
-
+      regForm,//注册相关
       register,
+
+      login,//登入相关
+      loginForm,
     };
   },
 });
