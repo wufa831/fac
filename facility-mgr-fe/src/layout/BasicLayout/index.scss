@@ -1,0 +1,60 @@
+.basic-layout{
+  .app-header-placeholder{
+    height: 64px;
+    width: 100%;
+  }
+  .app-header{
+    height: 64px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 2px 8px rgb(230, 230, 230);
+    display: flex;
+    align-items: center;//垂直居中
+    justify-content: space-between;//两端对齐
+    padding: 0 16px;
+    width: 100%;
+    z-index: 1;
+  }
+  .left1{
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    .title{
+      font-size: 20px;
+    }
+  }
+  .right{
+    display: flex;
+    align-items: center;
+    .logout{
+      width: 80px;
+      text-align: center;
+      height: 64px;
+      line-height: 64px;
+      cursor: pointer;
+      margin-left: 16px;
+      &:hover{//伪类选择器
+
+        background-color: rgb(230, 230, 230);
+      }
+    }
+  }
+  .app-content{
+    display: flex;
+    .left2{
+      width: 220px;
+      background-color: rgb(230, 230, 230);
+      position: fixed;
+      top: 64px;
+      bottom: 0;
+    }
+    .right{
+      flex: 1;
+      padding: 24px;
+      margin-left: 220px;
+    }
+
+}
+}

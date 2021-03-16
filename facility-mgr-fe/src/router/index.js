@@ -6,11 +6,18 @@ const routes = [
     name: 'Auth',
     component: () => import(/* webpackChunkName: "auth" */ '../views/Auth/index.vue'),
   },
-  // {
-  //   path: '/about',
-  //   name: 'About',
-  //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
-  // },
+  {
+    path: '/',
+    name: 'BasicLayout',
+    component: () => import(/* webpackChunkName: "BasicLayout " */ '../layout/BasicLayout/index.vue'),
+    children: [//router-view子路由
+      {
+        path: '/facilities',
+        name: 'Facilities',
+        component: () => import(/* webpackChunkName: "Facilities" */ '../views/Facilities/index.vue'),
+      },
+    ],
+  },
 ];
 
 const router = createRouter({
