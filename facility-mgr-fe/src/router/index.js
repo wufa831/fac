@@ -10,7 +10,7 @@ const routes = [
     path: '/',
     name: 'BasicLayout',
     component: () => import(/* webpackChunkName: "BasicLayout " */ '../layout/BasicLayout/index.vue'),
-    children: [//router-view子路由
+    children: [//router-view子路由 渲染到BasicLayout
       {
         path: '/facilities',
         name: 'Facilities',

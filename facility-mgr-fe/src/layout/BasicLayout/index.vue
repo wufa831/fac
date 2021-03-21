@@ -6,7 +6,7 @@
           门磁设备管理系统
         </div>
       </div>
-      <div class="right">
+      <div class="right1">
         <div class="hello-msg">
           你好，xx
         </div>
@@ -17,9 +17,11 @@
     <div class="app-content">
       <div class="left2">
         <app-nav/>
+        <!-- AppNav转换小写通过- -->
       </div>
-      <div class="right">
+      <div class="right2">
         <router-view/>
+        <!-- 根据路由把页面渲染上去 -->
       </div>
       
     </div>
