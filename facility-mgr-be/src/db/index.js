@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 require('./Schemas/User');
 require('./Schemas/InviteCode');//require就会执行这个文件进行注册model
+require('./Schemas/Facility');
 
 const connect = async () => {
   return new Promise((resolve) => {
