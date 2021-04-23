@@ -1,7 +1,7 @@
 import { defineComponent, ref,onMounted } from 'vue';
 import AddOne from './AddOne/index.vue';
 import { message } from 'ant-design-vue';
-import { facility } from '@/service';
+import { vendor } from '@/service';
 import { result,formatTimestamp } from '@/helpers/utils';
 export default defineComponent({
   components: {
@@ -10,42 +10,30 @@ export default defineComponent({
   setup() {
     const columns = [
       {
-        title: '设备厂商',
-        dataIndex: 'vendor',
+        title: '厂商名称',
+        dataIndex: 'vendorname',
       },
       {
-        title: 'IMEI号',
-        dataIndex: 'IMEI',
+        title: '供应商编号',
+        dataIndex: 'no',
       },
       {
-        title: 'ICCID串号',
-        dataIndex: 'ICCID',
+        title: '联系人',
+        dataIndex: 'contact',
       },
       {
-        title: 'SN号',
-        dataIndex: 'SN',
+        title: '联系方式',
+        dataIndex: 'tel',
       },
       {
-        title: '客户名称',
-        dataIndex: 'custom',
+        title: '地址',
+        dataIndex: 'address',
       },
+      
       {
-        title: '设备状态',
-        dataIndex: 'state',
-      },
-      {
-        title: '场景属性',
-        dataIndex: 'scene',
-      },
-      {
-        title: '安装行政区',
-        dataIndex: 'area',
-      },
-      {
-        title: '激活时间',
-        dataIndex: 'activeTime',
+        title: '创建时间',
         slots: {
-          customRender:'activeTime',
+          customRender:'createdAt',
         },
       },
       {
@@ -65,39 +53,46 @@ export default defineComponent({
     const isSearch = ref(false);
 
 //获取设备列表
-    const getList = async () => {
-      const res = await facility.list({
-        page: curPage.value,
-        size: 10,
-        keyword:keyword.value,
-      });
+    const getVendor = async () => {
+
+      const res = await vendor.list(
+        {
+          page: curPage.value,
+          size: 10,
+          keyword:keyword.value,
+        }
+      );
       
       result(res)
         .success(({ data }) => {
-          const { list: l, total: t } = data;
+          const { list:l, total:t } = data;
           list.value = l;
           total.value = t;
         });
     }
 
-    onMounted(async() => {
-      getList();
-    });//生命周期的函数的钩子,当组件被挂载在页面上显示出的时候做什么事情
-    //设置页码
+    onMounted(async () => {
+      // getList();
+      getVendor();
+    
+    });
+ 
     const setPage = (page) => {
       curPage.value = page;
 
-      getList();
+      getVendor();
     };
+
+
 //触发搜索
     const onSearch = () => {
-      getList();
+      getVendor();
       isSearch.value = Boolean(keyword.value);
     };
 //返回主页面   
     const backAll = () => {
       keyword.value = '';
-      getList();
+      getVendor();
       isSearch.value = false;
     };
 //删除一个设备
@@ -106,19 +101,13 @@ export default defineComponent({
       //拿到表格每一行的记录
       const { _id } = record;
       // 拿到这一行的id
-      const res = await facility.remove(_id);
+      const res = await vendor.remove(_id);
       //向服务端发送http请求，删除之后返回res数据
       //result方法处理返回的值
       result(res)
         .success(({ msg }) => {
           message.success(msg);
-
-          // const idx = list.value.findIndex((item) => {
-          //   return item._id === _id;
-          // });
-
-          // list.value.splice(idx, 1);
-          getList();
+          getVendor();
         });
     };
 
@@ -134,6 +123,7 @@ export default defineComponent({
       onSearch,
       backAll,
       isSearch,
+      getVendor,
       remove,
     };
   },

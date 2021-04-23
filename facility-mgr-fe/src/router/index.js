@@ -12,9 +12,19 @@ const routes = [
     component: () => import(/* webpackChunkName: "BasicLayout " */ '../layout/BasicLayout/index.vue'),
     children: [//router-view子路由 渲染到BasicLayout
       {
-        path: '/facilities',
+        path: 'facilities',
         name: 'Facilities',
         component: () => import(/* webpackChunkName: "Facilities" */ '../views/Facilities/index.vue'),
+      },
+      {
+        path: 'user',
+        name: 'User',
+        component: () => import(/* webpackChunkName: "User" */ '../views/Users/index.vue'),
+      },
+      {
+        path: 'vendor',
+        name: 'Vendor',
+        component: () => import(/* webpackChunkName: "Vendor" */ '../views/Vendors/index.vue'),
       },
     ],
   },

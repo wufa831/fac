@@ -1,14 +1,14 @@
 <template>
   <div>
     <a-card>
-      <h2>设备列表</h2>
+      <h2>供应商列表</h2>
 
       <a-divider/>
       
       <space-between>
        <div class="search">
         <a-input-search
-         placeholder="根据设备号搜索"
+         placeholder="根据供应商名称搜索"
          enter-button
          v-model:value="keyword"
          @search="onSearch"
@@ -17,7 +17,7 @@
        <a v-if="isSearch" href="javascript:;" @click="backAll">返回</a>
        </div>
       
-       <a-button @click="show =true">添加一条</a-button>
+       <a-button @click="show =true">添加供应商</a-button>
       </space-between>
 
       <a-divider/>
@@ -27,14 +27,16 @@
         :data-source="list"
         :pagination="false"
        >
-         <template #activeTime="data">
-           <!-- 插槽的一种写法 -->
-            {{formatTimestamp(data.record.activeTime)}}
-         </template>
+        <template #createdAt="{record}">
+            {{formatTimestamp(record.meta.createdAt)}}
+          </template>
+         
          <template #actions="record">
            <!-- 这里就得提到一个表格特有的参数了，通过这个参数，我们可以拿到表格每一行的数据，这个参数就是record
             用法：例如，表格行中有一个属性是name，那么，我要拿到这个每一行name的值，我就可以用过record.name来拿到 -->
+            <!-- <a href="javascript:;" @click="remove(record)">编辑</a> -->
             <a href="javascript:;" @click="remove(record)">删除</a>
+            
          </template>
        </a-table>
        <space-between
@@ -52,7 +54,9 @@
 
     <add-one
       v-model:show="show"
+      
     />
+    <!-- @getList="getVendor" -->
   </div>
 </template>
 
