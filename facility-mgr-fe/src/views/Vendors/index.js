@@ -1,11 +1,13 @@
 import { defineComponent, ref,onMounted } from 'vue';
 import AddOne from './AddOne/index.vue';
+import EditOne from './EditOne/index.vue';
 import { message } from 'ant-design-vue';
 import { vendor } from '@/service';
 import { result,formatTimestamp } from '@/helpers/utils';
 export default defineComponent({
   components: {
     AddOne,
+    EditOne,
   },
   setup() {
     const columns = [

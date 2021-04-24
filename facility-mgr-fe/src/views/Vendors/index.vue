@@ -54,7 +54,9 @@
 
     <add-one
       v-model:show="show"
-      
+    />
+    <edit-one
+   
     />
     <!-- @getList="getVendor" -->
   </div>
