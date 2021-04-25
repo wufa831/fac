@@ -1,8 +1,8 @@
-<template>
+ <template>
   <div>
     <a-modal
       title="修改信息"
-      :visible="true"
+      :visible="props.show"
       @ok="submit"
       @cancel="close"
     >

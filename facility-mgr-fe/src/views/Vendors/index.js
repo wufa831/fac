@@ -47,7 +47,7 @@ export default defineComponent({
     ];
     
     const show = ref(false);//控制页面是否显示，用props
-
+    const showedit = ref(false);
     const list = ref([]);
     const total = ref(0);
     const curPage = ref(1);
@@ -127,6 +127,7 @@ export default defineComponent({
       isSearch,
       getVendor,
       remove,
+      showedit,
     };
   },
 
