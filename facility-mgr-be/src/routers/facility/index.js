@@ -93,4 +93,40 @@ router.delete('/:id', async (ctx) => {
   };
 });
 
+router.post('/update', async (ctx) => {
+  const {
+    id,
+    ...others//other必须是最后一个元素，加了逗号会报错因为默认后面还有别的元素
+  } = ctx.request.body;
+
+  const one = await Facility.findOne({
+    _id: id,
+  }).exec();
+
+  if (!one) {
+    ctx.body = {
+      code: 0,
+      msg: '没找到设备',
+    };
+    return;
+  }
+  
+  const newQuery = {};
+  Object.entries(others).forEach(([key,value]) => {
+    if (value) {
+      newQuery[key] = value;
+    }
+  });
+
+  Object.assign(one, newQuery);
+
+  const res= await one.save();
+
+  ctx.body = {
+    data:res,
+    msg:'修改成功',
+    code: 1,
+  };
+
+});
 module.exports = router;

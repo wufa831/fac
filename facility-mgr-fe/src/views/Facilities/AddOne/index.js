@@ -28,7 +28,7 @@ export default defineComponent({
   },
 
   setup(props,context) {//在组件初始化时执行
-    console.log(props);
+
     const addForm = reactive(clone(defaultFormdata));//生拷贝防止reactive对数据产生影响
 
     const submit = async () => {
@@ -40,6 +40,7 @@ export default defineComponent({
         .success((d,{data}) => {
           Object.assign(addForm, defaultFormdata);//成功就合并表单，做到清空表单
           message.success(data.msg);
+          close();
         });
     };
 

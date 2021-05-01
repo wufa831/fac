@@ -23,6 +23,11 @@ export const remove = (id) => {
   );
 };
 
+export const update = (data={}) => {
+  return axios.post('http://localhost:3000/facility/update', 
+    data,
+  );
+};
 // export const login = (account,password) => {
 //   return axios.post('http://localhost:3000/auth/login', {
 //     account,

@@ -52,7 +52,8 @@ export default defineComponent({
     const total = ref(0);
     const curPage = ref(1);
     const keyword = ref('');
-    const isSearch = ref(false);
+    const isSearch = ref(false); 
+    const curVendor = ref({});
 
 //获取设备列表
     const getVendor = async () => {
@@ -113,6 +114,17 @@ export default defineComponent({
         });
     };
 
+
+    const update = async({record}) => {
+     
+      curVendor.value = record;
+
+    };
+
+    const updateCurVendor = (newData) => {
+      Object.assign(curVendor.value, newData);
+    };
+
     return {
       columns,
       show,
@@ -128,6 +140,9 @@ export default defineComponent({
       getVendor,
       remove,
       showedit,
+      update,
+      curVendor,
+      updateCurVendor,
     };
   },
 

@@ -31,10 +31,11 @@
             {{formatTimestamp(record.meta.createdAt)}}
           </template>
          
-         <template #actions="record">
+        <template #actions="record">
            <!-- 这里就得提到一个表格特有的参数了，通过这个参数，我们可以拿到表格每一行的数据，这个参数就是record
             用法：例如，表格行中有一个属性是name，那么，我要拿到这个每一行name的值，我就可以用过record.name来拿到 -->
-            <a href="javascript:;" @click="showedit=true">编辑</a>
+            <!-- <a href="javascript:;" @click="showedit=true">编辑</a> -->
+            <a href="javascript:;" @click="update(record); showedit = true;">编辑</a>
             &nbsp;
             <a href="javascript:;" @click="remove(record)">删除</a>
             
@@ -58,12 +59,16 @@
     />
     <edit-one
       v-model:show="showedit"
+      :vendor="curVendor"
+      @update="updateCurVendor"
     />
     <!-- @getList="getVendor" -->
   </div>
 </template>
 
-<script src='./index.js'></script>
+<script src='./index.js'>
+
+</script>
 
 <style lang="scss" scoped>  //加scoped解决组件之间样式相互影响的问题，给生成的css带上属性选择器，不加所有class相同都会生效
  @import './index.scss';

@@ -8,10 +8,6 @@ export const list = (data) => {
   );
 };
 
-// export const remove = (id) => {
-//   return axios.delete(`http://localhost:3000/vendor/`);
-// };
-
 export const add = (form) => {
   return axios.post(
     'http://localhost:3000/vendor/add', 
@@ -21,4 +17,10 @@ export const add = (form) => {
 
 export const remove = (id) => {
   return axios.delete(`http://localhost:3000/vendor/${id}`);
+};
+
+export const update = (data={}) => {
+  return axios.post('http://localhost:3000/vendor/update', 
+    data,
+  );
 };

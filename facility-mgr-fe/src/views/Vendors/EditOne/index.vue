@@ -9,19 +9,19 @@
  <!-- :visible="props.show" -->
     <a-form :label-col="{span:6}" :wrapper-col="{span:16}">
       <a-form-item label="厂商名称">
-        <a-input v-model:value="addForm.vendorname" />
+        <a-input v-model:value="editForm.vendorname" />
       </a-form-item>
       <a-form-item label="供应商编号">
-        <a-input v-model:value="addForm.no" />
+        <a-input v-model:value="editForm.no" />
       </a-form-item>
       <a-form-item label="联系人">
-        <a-input v-model:value="addForm.contact" />
+        <a-input v-model:value="editForm.contact" />
       </a-form-item>
       <a-form-item label="联系方式">
-        <a-input v-model:value="addForm.tel" />
+        <a-input v-model:value="editForm.tel" />
       </a-form-item>
       <a-form-item label="地址">
-        <a-input v-model:value="addForm.address" />
+        <a-input v-model:value="editForm.address" />
       </a-form-item>
 
     </a-form>

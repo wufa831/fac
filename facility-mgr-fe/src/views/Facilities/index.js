@@ -1,11 +1,13 @@
 import { defineComponent, ref,onMounted } from 'vue';
 import AddOne from './AddOne/index.vue';
+import EditOne from './EditOne/index.vue';
 import { message } from 'ant-design-vue';
 import { facility } from '@/service';
 import { result,formatTimestamp } from '@/helpers/utils';
 export default defineComponent({
   components: {
     AddOne,
+    EditOne,
   },
   setup() {
     const columns = [
@@ -57,12 +59,13 @@ export default defineComponent({
     ];
     
     const show = ref(false);//控制页面是否显示，用props
-
+    const showedit = ref(false);
     const list = ref([]);
     const total = ref(0);
     const curPage = ref(1);
     const keyword = ref('');
     const isSearch = ref(false);
+    const curFacility = ref({});
 
 //获取设备列表
     const getList = async () => {
@@ -112,14 +115,18 @@ export default defineComponent({
       result(res)
         .success(({ msg }) => {
           message.success(msg);
-
-          // const idx = list.value.findIndex((item) => {
-          //   return item._id === _id;
-          // });
-
-          // list.value.splice(idx, 1);
           getList();
         });
+    };
+
+    const update = async({record}) => {
+     
+      curFacility.value = record;
+
+    };
+
+    const updatecurFacility = (newData) => {
+      Object.assign(curFacility.value, newData);
     };
 
     return {
@@ -135,6 +142,10 @@ export default defineComponent({
       backAll,
       isSearch,
       remove,
+      showedit,
+      update,
+      curFacility,
+      updatecurFacility,
     };
   },
 
