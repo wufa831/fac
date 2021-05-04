@@ -44,3 +44,7 @@ export const formatTimestamp = (ts) => {
   return `${YYYY}/${MM}/${DD} ${hh}:${mm}:${ss}`;
 
 };
+
+export const orderkind = (val) => {
+  return ['CRM订单','自建订单'][val];
+};

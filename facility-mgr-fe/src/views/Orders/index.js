@@ -2,8 +2,8 @@ import { defineComponent, ref,onMounted } from 'vue';
 import AddOne from './AddOne/index.vue';
 import EditOne from './EditOne/index.vue';
 import { message } from 'ant-design-vue';
-import { facility } from '@/service';
-import { result,formatTimestamp } from '@/helpers/utils';
+import { order } from '@/service';
+import { result,formatTimestamp,orderkind } from '@/helpers/utils';
 export default defineComponent({
   components: {
     AddOne,
@@ -12,42 +12,27 @@ export default defineComponent({
   setup() {
     const columns = [
       {
-        title: '设备厂商',
-        dataIndex: 'vendor',
-      },
-      {
-        title: 'IMEI号',
-        dataIndex: 'IMEI',
-      },
-      {
-        title: 'ICCID串号',
-        dataIndex: 'ICCID',
-      },
-      {
-        title: 'SN号',
-        dataIndex: 'SN',
+        title: '订单编号',
+        dataIndex: 'no',
       },
       {
         title: '客户名称',
         dataIndex: 'custom',
       },
       {
-        title: '设备状态',
-        dataIndex: 'state',
+        title: '订单总数',
+        dataIndex: 'sum',
       },
       {
-        title: '场景属性',
-        dataIndex: 'scene',
-      },
-      {
-        title: '安装行政区',
-        dataIndex: 'area',
-      },
-      {
-        title: '激活时间',
-        dataIndex: 'activeTime',
+        title: '订单类型',
         slots: {
-          customRender:'activeTime',
+          customRender:'kind',//此处在出入库章节需要修改
+        },
+      },
+      {
+        title: '创建日期',
+        slots: {
+          customRender:'createdAt',//此处在出入库章节需要修改
         },
       },
       {
@@ -63,18 +48,16 @@ export default defineComponent({
     const list = ref([]);
     const total = ref(0);
     const curPage = ref(1);
-    const keyword1 = ref('');
-    const keyword2 = ref('');
+    const keyword = ref('');
     const isSearch = ref(false);
     const curFacility = ref({});
 
 //获取设备列表
     const getList = async () => {
-      const res = await facility.list({
+      const res = await order.list({
         page: curPage.value,
         size: 10,
-        keyword1: keyword1.value,
-        keyword2:keyword2.value,
+        keyword:keyword.value,
       });
       
       result(res)
@@ -97,12 +80,11 @@ export default defineComponent({
 //触发搜索
     const onSearch = () => {
       getList();
-      isSearch.value = Boolean(keyword1.value||keyword2.value);
+      isSearch.value = Boolean(keyword.value);
     };
 //返回主页面   
     const backAll = () => {
-      keyword1.value = '';
-      keyword2.value = '';
+      keyword.value = '';
       getList();
       isSearch.value = false;
     };
@@ -112,7 +94,7 @@ export default defineComponent({
       //拿到表格每一行的记录
       const { _id } = record;
       // 拿到这一行的id
-      const res = await facility.remove(_id);
+      const res = await order.remove(_id);
       //向服务端发送http请求，删除之后返回res数据
       //result方法处理返回的值
       result(res)
@@ -137,11 +119,11 @@ export default defineComponent({
       show,
       list,
       formatTimestamp,
+      orderkind,
       curPage,
       total,
       setPage,
-      keyword1,
-      keyword2,
+      keyword,
       onSearch,
       backAll,
       isSearch,
@@ -150,6 +132,7 @@ export default defineComponent({
       update,
       curFacility,
       updatecurFacility,
+      getList,
     };
   },
 

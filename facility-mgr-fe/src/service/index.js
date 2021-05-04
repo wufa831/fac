@@ -2,3 +2,4 @@ export * as auth from './auth';//把所有auth相关的函数命名为auth的对
 export * as facility from './facility';
 export * as user from './user';
 export * as vendor from './vendor';
+export * as order from './order';
