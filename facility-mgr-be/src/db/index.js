@@ -4,6 +4,7 @@ require('./Schemas/InviteCode');//require就会执行这个文件进行注册mod
 require('./Schemas/Vendor');
 require('./Schemas/Facility');
 require('./Schemas/Order');
+require('./Schemas/State');
 const connect = async () => {
   return new Promise((resolve) => {
     mongoose.connect('mongodb://127.0.0.1:27017/facility-mgr');

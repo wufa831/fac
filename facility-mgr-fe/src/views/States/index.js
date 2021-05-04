@@ -2,8 +2,8 @@ import { defineComponent, ref,onMounted } from 'vue';
 import AddOne from './AddOne/index.vue';
 import EditOne from './EditOne/index.vue';
 import { message } from 'ant-design-vue';
-import { facility } from '@/service';
-import { result,formatTimestamp } from '@/helpers/utils';
+import { state } from '@/service';
+import { result,statekind,isusekind} from '@/helpers/utils';
 export default defineComponent({
   components: {
     AddOne,
@@ -12,44 +12,30 @@ export default defineComponent({
   setup() {
     const columns = [
       {
-        title: '设备厂商',
-        dataIndex: 'vendor',
+        title: '场景名称',
+        dataIndex: 'statename',
       },
       {
-        title: 'IMEI号',
-        dataIndex: 'IMEI',
-      },
-      {
-        title: 'ICCID串号',
-        dataIndex: 'ICCID',
-      },
-      {
-        title: 'SN号',
-        dataIndex: 'SN',
-      },
-      {
-        title: '客户名称',
-        dataIndex: 'custom',
-      },
-      {
-        title: '设备状态',
-        dataIndex: 'state',
-      },
-      {
-        title: '场景属性',
-        dataIndex: 'scene',
-      },
-      {
-        title: '安装行政区',
-        dataIndex: 'area',
-      },
-      {
-        title: '激活时间',
-        dataIndex: 'activeTime',
+        title: '场景类型',
         slots: {
-          customRender:'activeTime',
+          customRender:'statetype',
         },
       },
+      {
+        title: '是否布防',
+        slots: {
+          customRender:'isuse',
+        },
+      },
+      {
+        title: '门开时长（秒）',
+        dataIndex: 'actiontime',
+      },
+      {
+        title: '电量预警（%）',
+        dataIndex: 'power',
+      },
+    
       {
         title: '操作',
         slots: {
@@ -70,7 +56,7 @@ export default defineComponent({
 
 //获取设备列表
     const getList = async () => {
-      const res = await facility.list({
+      const res = await state.list({
         page: curPage.value,
         size: 10,
         keyword1: keyword1.value,
@@ -97,6 +83,8 @@ export default defineComponent({
 //触发搜索
     const onSearch = () => {
       getList();
+      console.log(keyword1);
+      console.log(keyword2);
       isSearch.value = Boolean(keyword1.value||keyword2.value);
     };
 //返回主页面   
@@ -112,7 +100,7 @@ export default defineComponent({
       //拿到表格每一行的记录
       const { _id } = record;
       // 拿到这一行的id
-      const res = await facility.remove(_id);
+      const res = await state.remove(_id);
       //向服务端发送http请求，删除之后返回res数据
       //result方法处理返回的值
       result(res)
@@ -136,7 +124,8 @@ export default defineComponent({
       columns,
       show,
       list,
-      formatTimestamp,
+      statekind,
+      isusekind,
       curPage,
       total,
       setPage,

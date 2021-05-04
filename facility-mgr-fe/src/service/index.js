@@ -3,3 +3,4 @@ export * as facility from './facility';
 export * as user from './user';
 export * as vendor from './vendor';
 export * as order from './order';
+export * as state from './state';

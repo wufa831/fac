@@ -1,20 +1,20 @@
 <template>
   <div>
     <a-card>
-      <h2>设备列表</h2>
+      <h2>场景列表</h2>
 
       <a-divider/>
       
       <space-between>
        <div class="search">
         <a-input-search
-         placeholder="根据设备厂商搜索"
+         placeholder="根据场景名称搜索"
          enter-button
          v-model:value="keyword1"
          @search="onSearch"
        />
        <a-input-search
-         placeholder="根据IMEI号搜索"
+         placeholder="根据场景类型搜索"
          enter-button
          v-model:value="keyword2"
          @search="onSearch"
@@ -23,7 +23,7 @@
        <a v-if="isSearch" href="javascript:;" @click="backAll">返回</a>
        </div>
       
-       <a-button @click="show =true">添加设备</a-button>
+       <a-button @click="show =true">添加场景</a-button>
       </space-between>
 
       <a-divider/>
@@ -33,9 +33,13 @@
         :data-source="list"
         :pagination="false"
        >
-         <template #activeTime="record">
+         <template #statetype="record">
            <!-- 插槽的一种写法 -->
-            {{formatTimestamp(record.record.activeTime)}}
+            {{statekind(record.record.statetype)}}
+         </template>
+         <template #isuse="record">
+           <!-- 插槽的一种写法 -->
+            {{isusekind(record.record.isuse)}}
          </template>
          <template #actions="record">
            <!-- 这里就得提到一个表格特有的参数了，通过这个参数，我们可以拿到表格每一行的数据，这个参数就是record

@@ -1,25 +1,17 @@
 import { defineComponent,reactive } from 'vue';
-import { facility } from '@/service';
+import { state } from '@/service';
 import { message } from 'ant-design-vue';
 import { result,clone } from '@/helpers/utils';
 const defaultFormdata = {
-  vendor: '',
-  // IMEI号
-  IMEI: '',
-  //ICCID串号
-  ICCID: '',
-  //SN号
-  SN: '',
-  //客户名称
-  custom: '',
-  //设备状态
-  state: '',
-  //场景属性
-  scene: '',
-  //安装行政区
-  area: '',
-  //激活时间
-  activeTime: 0,
+  statename:'',
+    //类型
+  statetype:'',
+    //是否布防，布防则同步到设备
+  isuse:'',
+    //门开时长
+  actiontime:'',
+    //电量预警
+  power:'',
 };
 export default defineComponent({
 
@@ -33,8 +25,8 @@ export default defineComponent({
 
     const submit = async () => {
       const form = clone(addForm);//复制出一个新表单
-      form.activeTime = addForm.activeTime.valueOf();  //激活时间改成时间戳的形式
-      const res = await facility.add(form);
+      // form.activeTime = addForm.activeTime.valueOf();  //激活时间改成时间戳的形式
+      const res = await state.add(form);
 
       result(res)
         .success((d,{data}) => {

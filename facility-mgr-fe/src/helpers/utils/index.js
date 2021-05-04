@@ -48,3 +48,11 @@ export const formatTimestamp = (ts) => {
 export const orderkind = (val) => {
   return ['CRM订单','自建订单'][val];
 };
+
+export const statekind = (val) => {
+  return ['独居老人','常规监控','常开门','常闭门'][val];
+};
+
+export const isusekind = (val) => {
+  return ['是','否'][val];
+};

@@ -4,7 +4,7 @@ const facility = require('./facility');
 const user = require('./user');
 const vendor = require('./vendor');
 const order = require('./order');
-
+const state = require('./state');
 module.exports = (app) => {
   app.use(auth.routes());//koarouter提供的routes方法注册路由
   app.use(inviteCode.routes());
@@ -12,4 +12,5 @@ module.exports = (app) => {
   app.use(user.routes());//注册中间件
   app.use(vendor.routes());
   app.use(order.routes());
+  app.use(state.routes());
 };
