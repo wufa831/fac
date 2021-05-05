@@ -2,7 +2,7 @@ import { defineComponent, ref,onMounted } from 'vue';
 import AddOne from './AddOne/index.vue';
 import EditOne from './EditOne/index.vue';
 import { message } from 'ant-design-vue';
-import { facility } from '@/service';
+import { facility,state } from '@/service';
 import { result,formatTimestamp } from '@/helpers/utils';
 export default defineComponent({
   components: {
@@ -67,6 +67,24 @@ export default defineComponent({
     const keyword2 = ref('');
     const isSearch = ref(false);
     const curFacility = ref({});
+    let list1 = ref([]);
+    let list2 = ref([]);
+    const loading = ref(true);
+
+    const getScene = async () => {
+      loading.value = true;
+      const res = await state.list();
+      loading.value = false;
+      result(res)
+        .success(({ data }) => {
+          list1 = data.list;
+          for (let i = 0; i < list1.length; i++) {
+            list2.value[i] = list1[i].statename;
+          };
+         
+          
+        });
+    };
 
 //获取设备列表
     const getList = async () => {
@@ -85,8 +103,10 @@ export default defineComponent({
         });
     }
 
-    onMounted(async() => {
+    onMounted(async () => {
+      await getScene();
       getList();
+      
     });//生命周期的函数的钩子,当组件被挂载在页面上显示出的时候做什么事情
     //设置页码
     const setPage = (page) => {
@@ -151,6 +171,9 @@ export default defineComponent({
       curFacility,
       updatecurFacility,
       getList,
+      getScene,
+      loading,
+      list2,
     };
   },
 

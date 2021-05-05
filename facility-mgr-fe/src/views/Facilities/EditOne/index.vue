@@ -27,7 +27,18 @@
         <a-input v-model:value="editForm.state" />
       </a-form-item>
       <a-form-item label="场景属性">
-        <a-input v-model:value="editForm.scene" />
+        <a-select
+          v-model:value="editForm.scene"
+          style="width: 120px"
+        >
+          <a-select-option 
+            v-for="item in statelist"
+            :key="item"
+            :value="item"
+
+          >{{item}}</a-select-option>
+
+        </a-select>
       </a-form-item>
       <a-form-item label="安装行政区">
         <a-input v-model:value="editForm.area" />

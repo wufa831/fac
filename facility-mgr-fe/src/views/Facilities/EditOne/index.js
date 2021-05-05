@@ -7,7 +7,8 @@ import { update } from '../../../service/facility';
 export default defineComponent({
     props: {
     show: Boolean,
-    facility:Object,
+    facility: Object,
+    statelist: Array,
   },
   setup(props, context) {
 

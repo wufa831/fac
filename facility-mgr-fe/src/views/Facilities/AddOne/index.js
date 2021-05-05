@@ -24,7 +24,8 @@ const defaultFormdata = {
 export default defineComponent({
 
   props: {
-    show:Boolean,
+    show: Boolean,
+    statelist:Array,
   },
 
   setup(props,context) {//在组件初始化时执行

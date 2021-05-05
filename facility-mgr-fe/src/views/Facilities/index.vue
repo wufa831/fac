@@ -23,7 +23,10 @@
        <a v-if="isSearch" href="javascript:;" @click="backAll">返回</a>
        </div>
       
-       <a-button @click="show =true">添加设备</a-button>
+       <a-button 
+        @click="show =true"
+        :loading="loading"
+      >添加设备</a-button>
       </space-between>
 
       <a-divider/>
@@ -61,11 +64,13 @@
     <add-one
       v-model:show="show"
       @getList="getList"
+      :statelist="list2"
     />
     <edit-one
       v-model:show="showedit"
       :facility="curFacility"
       @update="updatecurFacility"
+      :statelist="list2"
     />
   </div>
 </template>
