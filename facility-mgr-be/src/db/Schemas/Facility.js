@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { getMate } = require('../helpers');
+const { getMeta, preSave} = require('../helpers');
 
 //用户的schema
 //映射到用户文档的数据
@@ -24,7 +24,9 @@ const FacilitySchema = new mongoose.Schema({
   //激活时间
   activeTime:String,
 
-  meta: getMate(),//包括创建时间和修改时间，为通用语言信息
+  meta: getMeta(),//包括创建时间和修改时间，为通用语言信息
 });
+
+FacilitySchema.pre('save', preSave);//在save之前做presave
 
 mongoose.model('Facility', FacilitySchema);

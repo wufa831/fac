@@ -1,12 +1,13 @@
 import { defineComponent,reactive } from 'vue';
 import { user } from '@/service';
 import { message } from 'ant-design-vue';
-import { result,clone } from '@/helpers/utils';
+import { result, clone } from '@/helpers/utils';
+import store from '@/store';
+
 const defaultFormdata = {
   account: '',
-  password:'',
-
-
+  password: '',
+  character:'',
 };
 export default defineComponent({
 
@@ -15,9 +16,11 @@ export default defineComponent({
   },
 
   setup(props,context) {//在组件初始化时执行
-
+    const { characterInfo } = store.state; 
+    
     const addForm = reactive(clone(defaultFormdata));//生拷贝防止reactive对数据产生影响
 
+    addForm.character = characterInfo[1]._id;
     const close = () => {
       context.emit('update:show', false);//emit用来触发自定义事件]
       //v-model双向绑定show的值 update更新show的值为false
@@ -26,7 +29,7 @@ export default defineComponent({
     const submit = async () => {
       const form = clone(addForm);//复制出一个新表单
 
-      const res = await user.add(form.account,form.password);
+      const res = await user.add(form.account,form.password,form.character);
 
       result(res)
         .success((d,{data}) => {
@@ -45,6 +48,7 @@ export default defineComponent({
       submit,
       props,
       close,
+      characterInfo,
     };
   },
 });

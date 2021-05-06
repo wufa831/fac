@@ -5,6 +5,8 @@ const {getBody } = require('../../helpers/utils');
 const jwt = require('jsonwebtoken');
 const User= mongoose.model('User');
 const InviteCode = mongoose.model('InviteCode');
+const config = require('../../project.config');
+
 const router = new Router({
   prefix: '/auth',
 });
@@ -106,6 +108,7 @@ router.post('/login', async (ctx) => {
 
   const user = {
     account: one.account,
+    character:one.character,
     _id: one._id,//mongdb自动生成
   };
   if (one.password === password) {
@@ -114,7 +117,7 @@ router.post('/login', async (ctx) => {
       msg: '登入成功',
       data: {
         user,
-        token: jwt.sign(user, 'facility-mgr'),
+        token: jwt.sign(user, config.JWT_SECRET),
         //one对象不能直接被jwt处理
       },
     };

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { getMate } = require('../helpers');
+const { getMeta,preSave } = require('../helpers');
 
 //供应商
 //映射到用户文档的数据
@@ -11,7 +11,9 @@ const VendorSchema = new mongoose.Schema({
   tel: String,
   address:String,
 
-  meta: getMate(),//包括创建时间和修改时间，为通用语言信息
+  meta: getMeta(),//包括创建时间和修改时间，为通用语言信息
 });
+
+VendorSchema.pre('save', preSave);
 
 mongoose.model('Vendor', VendorSchema);

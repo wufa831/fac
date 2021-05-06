@@ -3,6 +3,10 @@ import {UserOutlined,LockOutlined,MailOutlined,} from '@ant-design/icons-vue';
 import { auth } from '@/service';
 import {result } from '@/helpers/utils';
 import { message } from 'ant-design-vue';
+import store from '@/store';
+import { getCharacterInfoById } from '@/helpers/character';
+import { useRouter } from 'vue-router';
+import { setToken } from '@/helpers/token';
 
 // auth.register
 export default defineComponent({
@@ -13,6 +17,8 @@ export default defineComponent({
   },
 
   setup() {
+
+    const router = useRouter();
     //注册用表单数据
     const regForm = reactive({ //声明多个响应式数据值，创建一组数据
       account: '',
@@ -73,8 +79,17 @@ export default defineComponent({
 
       const res= await auth.login(loginForm.account, loginForm.password);//解构方式拿到res.data
       result(res)
-        .success((data) => {
-          message.success(data.msg);
+        .success(({msg,data:{user,token}}) => {
+          message.success(msg);
+
+
+          store.commit('setUserInfo', user);
+          
+          store.commit('setUserCharacter', getCharacterInfoById(user.character));
+
+          setToken(token);
+
+          router.replace('/facilities');
         });
     };
 

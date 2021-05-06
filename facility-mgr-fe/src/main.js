@@ -6,9 +6,13 @@ import Antd from 'ant-design-vue';
 import SpaceBetween from './components/SpaceBetween/index.vue';
 import FlexEnd from './components/FlexEnd/index.vue';
 import 'ant-design-vue/dist/antd.css';
+import { regDirectives } from '@/helpers/directive';
 
+const app = createApp(App);
 
-createApp(App)///全局注册
+regDirectives(app);
+
+app///全局注册
   .use(store)
   .use(router)
   .use(Antd)

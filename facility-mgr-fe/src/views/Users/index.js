@@ -1,8 +1,11 @@
-import { defineComponent,ref,onMounted} from 'vue';
+import { defineComponent,ref,onMounted, reactive} from 'vue';
 import { user } from '@/service';
 import { message } from "ant-design-vue";
 import { result, formatTimestamp } from '@/helpers/utils';
 import AddOne from './AddOne/index.vue';
+import { getCharacterInfoById } from '@/helpers/character';
+import { EditOutlined } from '@ant-design/icons-vue';
+import store from '@/store';
 
 const columns = [
   {
@@ -16,6 +19,12 @@ const columns = [
     },
   },
   {
+    title: '角色',
+    slots: {
+      customRender:'character',//此处在出入库章节需要修改
+    },
+  },
+  {
     title: '操作',
     slots: {
       customRender:'actions',//此处在出入库章节需要修改
@@ -26,6 +35,7 @@ const columns = [
 export default defineComponent({
   components: {
     AddOne,
+    EditOutlined,
   },
   setup() {
     const showAddModal = ref(false);
@@ -34,6 +44,12 @@ export default defineComponent({
     const curPage = ref(1);
     const keyword = ref('');
     const isSearch = ref(false);
+    const showEdit = ref(false);
+
+    const editForm = reactive({
+      character: '',
+      current:{},
+    })
 
     const getUser = async() => {
       const res = await user.list(
@@ -89,6 +105,24 @@ export default defineComponent({
         });
     };
 
+    const onEdit = (record) => {
+      editForm.current = record;
+      editForm.character = record.character;
+      showEdit.value = true;
+    }
+
+    const updateCharacter = async () => {
+      const res = await user.editCharacter(editForm.character, editForm.current._id);
+      
+      result(res)
+        .success(({msg}) => {
+          message.success(msg);
+          showEdit.value = false;
+          editForm.current.character = editForm.character;
+
+        });
+    };
+
     return {
       list,
       total,
@@ -104,6 +138,13 @@ export default defineComponent({
       backAll,
       isSearch,
       keyword,
+
+      getCharacterInfoById,
+      showEdit,
+      editForm,
+      onEdit,
+      characterInfo: store.state.characterInfo,
+      updateCharacter,
     };                                                                                                                                                          
   },
 });
