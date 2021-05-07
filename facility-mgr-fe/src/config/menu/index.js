@@ -24,4 +24,9 @@ export default [
     url: '/vendor',
     onlyAdmin:false,
   },
+  {
+    title: '日志列表',
+    url: '/log',
+    onlyAdmin:true,
+  },
 ];

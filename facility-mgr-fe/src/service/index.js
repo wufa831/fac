@@ -5,3 +5,4 @@ export * as vendor from './vendor';
 export * as order from './order';
 export * as state from './state';
 export * as character from './character';
+export * as log from './log';

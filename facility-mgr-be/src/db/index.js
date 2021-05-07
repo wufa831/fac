@@ -7,6 +7,8 @@ require('./Schemas/Order');
 require('./Schemas/State');
 require('./Schemas/Character');
 
+require('./Schemas/Log');
+
 const connect = async () => {
   return new Promise((resolve) => {
     mongoose.connect('mongodb://127.0.0.1:27017/facility-mgr');

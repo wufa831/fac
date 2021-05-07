@@ -38,6 +38,11 @@ const routes = [
         name: 'State',
         component: () => import(/* webpackChunkName: "State" */ '../views/States/index.vue'),
       },
+      {
+        path: 'log',
+        name: 'Log',
+        component: () => import(/* webpackChunkName: "Log" */ '../views/Log/index.vue'),
+      },
     ],
   },
 ];
@@ -49,12 +54,20 @@ const router = createRouter({
 
 
 router.beforeEach(async (to, from, next) => {
-  if (!window.characterInfo) {
+  const reqArr = [];
+
+  if (!store.state.characterInfo.length) {
    
-    store.dispatch('getCharacterInfo');//store.dispatch触发actions
+    reqArr.push(store.dispatch('getCharacterInfo'));//store.dispatch触发actions
   }
 
-  store.dispatch('getUserInfo');
+  if (!store.state.userInfo.account) {
+   
+    reqArr.push(store.dispatch('getUserInfo'));//store.dispatch触发actions
+  }
+
+  await Promise.all(reqArr);//接收数组里的promise为reserve是进入.then
+  //所有请求都响应后在做接下来的事情
 
   next();
 });

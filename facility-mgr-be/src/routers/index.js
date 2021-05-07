@@ -6,7 +6,8 @@ const vendor = require('./vendor');
 const order = require('./order');
 const state = require('./state');
 const character = require('./character');
-  
+const log = require('./log');
+
 module.exports = (app) => {
   app.use(auth.routes());//koarouter提供的routes方法注册路由
   app.use(inviteCode.routes());
@@ -16,4 +17,5 @@ module.exports = (app) => {
   app.use(order.routes());
   app.use(state.routes());
   app.use(character.routes());
+  app.use(log.routes());
 };
