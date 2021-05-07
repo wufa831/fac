@@ -7,6 +7,10 @@ const order = require('./order');
 const state = require('./state');
 const character = require('./character');
 const log = require('./log');
+const forgetpassword = require('./forget-password');
+const profile = require('./profile');
+const dashboard = require('./dashboard');
+
 
 module.exports = (app) => {
   app.use(auth.routes());//koarouter提供的routes方法注册路由
@@ -18,4 +22,7 @@ module.exports = (app) => {
   app.use(state.routes());
   app.use(character.routes());
   app.use(log.routes());
+  app.use(forgetpassword.routes());
+  app.use(profile.routes());
+  app.use(dashboard.routes());
 };

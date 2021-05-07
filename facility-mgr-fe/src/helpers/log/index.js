@@ -7,6 +7,12 @@ const LOG_MAP = [
   ['/vendor/list', '获取供应商列表'],
   ['/user/list', '获取用户列表'],
   ['/order/list', '获取订单列表'],
+  ['/invite/list', '获取邀请码列表'],
+  ['/auth/login', '登录'],
+  ['/auth/register', '注册'],
+  ['/profile/update/password', '修改密码'],
+  ['/forget-password/list', '获取重置密码列表'],
+
 ];
 
 export const getLogInfoByPath = (path) => {//对path做判断 在logmap里做返回

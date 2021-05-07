@@ -9,6 +9,7 @@ require('./Schemas/Character');
 
 require('./Schemas/Log');
 require('./Schemas/LogResponse');
+require('./Schemas/ForgetPassword');
 
 const connect = async () => {
   return new Promise((resolve) => {

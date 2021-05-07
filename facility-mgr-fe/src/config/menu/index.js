@@ -29,4 +29,25 @@ export default [
     url: '/log',
     onlyAdmin:true,
   },
+  {
+    title: '账户相关',
+    onlyAdmin: true,
+    children: [
+      {
+        title: '重置密码列表',
+        url: '/reset/password',
+        onlyAdmin:true,
+      },
+      {
+        title: '邀请码列表',
+        url: '/invite-code',
+        onlyAdmin:true,
+      },
+    ]
+  },
+  {
+    title: '个人设置',
+    url: '/profile',
+    onlyAdmin: false,
+  },
 ];

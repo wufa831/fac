@@ -14,9 +14,9 @@ connect().then(() => {//注册中间件
   app.use(cors());    //解决跨域问题
   app.use(koaBody()); //请求体
   
-  app.use(catchTokenError);
+  // app.use(catchTokenError);
 
-  koaJwtMiddleware(app);
+  // koaJwtMiddleware(app);
 
   app.use(logMiddleware);
 
