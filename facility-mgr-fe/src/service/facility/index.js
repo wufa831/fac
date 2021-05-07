@@ -22,9 +22,10 @@ export const list = (data) => {
 };
 
 export const remove = (id) => {
-  return axios.delete(
-    // 'http://localhost:3000/facility/'+id,
-    `http://localhost:3000/facility/${id}`,
+  return axios.post(
+    'http://localhost:3000/facility/delete', {
+      id,
+    }
   );
 };
 

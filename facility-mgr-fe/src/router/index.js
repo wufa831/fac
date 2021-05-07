@@ -54,19 +54,19 @@ const router = createRouter({
 
 
 router.beforeEach(async (to, from, next) => {
-  const reqArr = [];
+  
 
   if (!store.state.characterInfo.length) {
    
-    reqArr.push(store.dispatch('getCharacterInfo'));//store.dispatch触发actions
+    await store.dispatch('getCharacterInfo');//store.dispatch触发actions
   }
 
   if (!store.state.userInfo.account) {
    
-    reqArr.push(store.dispatch('getUserInfo'));//store.dispatch触发actions
+    await store.dispatch('getUserInfo');//store.dispatch触发actions
   }
 
-  await Promise.all(reqArr);//接收数组里的promise为reserve是进入.then
+  // await Promise.all(reqArr);//接收数组里的promise为reserve是进入.then
   //所有请求都响应后在做接下来的事情
 
   next();

@@ -81,10 +81,10 @@ router.get('/list', async (ctx) => {    //获取所有列表作出响应
   };
 });
 
-router.delete('/:id', async (ctx) => {
+router.post('/delete', async (ctx) => {
   const {
     id,
-  } = ctx.params;
+  } = ctx.request.body;
 
   const delMsg = await Facility.deleteOne({
     _id: id,

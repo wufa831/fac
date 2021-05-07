@@ -8,6 +8,7 @@ require('./Schemas/State');
 require('./Schemas/Character');
 
 require('./Schemas/Log');
+require('./Schemas/LogResponse');
 
 const connect = async () => {
   return new Promise((resolve) => {

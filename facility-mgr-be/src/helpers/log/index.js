@@ -2,7 +2,7 @@ const { verify, getToken } = require('../token');
 const mongoose = require('mongoose');
 
 const Log = mongoose.model('Log');
-// const LogResponse = mongoose.model('LogResponse');
+const LogResponse = mongoose.model('LogResponse');
 
 const logMiddleware = async (ctx, next) => {//中间件，先记录一些数据 再做next
   const startTime = Date.now();//开始时间
@@ -23,14 +23,8 @@ const logMiddleware = async (ctx, next) => {//中间件，先记录一些数据 
 
   const method = ctx.method;
   const status = ctx.status;
-  // let show = true;
-
-  // if (url === '/log/delete') {
-  //   show = false;
-  // }
 
   let responseBody = '';
-
   if (typeof ctx.body === 'string') {
     responseBody = ctx.body;
   } else {
@@ -49,8 +43,7 @@ const logMiddleware = async (ctx, next) => {//中间件，先记录一些数据 
       id: payload.id,
     },
     request: {
-      url:url,
-      responseBody,
+      url,
       method,
       status,
     },
@@ -67,12 +60,12 @@ const logMiddleware = async (ctx, next) => {//中间件，先记录一些数据 
 
   log.save();
 
-  // const logRes = new LogResponse({
-  //   logId: log._id,
-  //   data: responseBody,
-  // });
+  const logRes = new LogResponse({
+    logId: log._id,
+    data: responseBody,
+  });
 
-  // logRes.save();
+  logRes.save();
 };
 
 module.exports = {

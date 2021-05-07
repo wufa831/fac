@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-menu
-    style="width: 100%"
+    style="width: 217px"
     v-model:openKeys="openKeys"
     v-model:selectedKeys="selectedKeys"
     mode="inline"
