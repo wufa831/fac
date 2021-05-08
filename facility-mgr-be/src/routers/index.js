@@ -10,7 +10,7 @@ const log = require('./log');
 const forgetpassword = require('./forget-password');
 const profile = require('./profile');
 const dashboard = require('./dashboard');
-
+const upload = require('./upload');
 
 module.exports = (app) => {
   app.use(auth.routes());//koarouter提供的routes方法注册路由
@@ -25,4 +25,5 @@ module.exports = (app) => {
   app.use(forgetpassword.routes());
   app.use(profile.routes());
   app.use(dashboard.routes());
+  app.use(upload.routes());
 };

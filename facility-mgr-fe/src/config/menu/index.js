@@ -1,5 +1,10 @@
 export default [
   {
+    title: '总览',
+    url: '/dashboard',
+    onlyAdmin: false,
+  },
+  {
     title: '设备管理',
     url: '/facilities',
     onlyAdmin:false,

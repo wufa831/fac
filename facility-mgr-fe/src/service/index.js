@@ -9,3 +9,4 @@ export * as log from './log';
 export * as resetPassword from './reset-password';
 export * as inviteCode from './invite-code';
 export * as profile from './profile';
+export * as dashboard from './dashboard';

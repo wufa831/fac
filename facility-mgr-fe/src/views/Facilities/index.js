@@ -152,6 +152,24 @@ export default defineComponent({
       Object.assign(curFacility.value, newData);
     };
 
+
+    const onUploadChange = ({ file }) => {
+      if (file.response) {
+        result(file.response)
+          .success(async (key) => {
+            
+            const res = await facility.addMany(key);
+            
+            result(res)
+              .success(({ data: { addCount } }) => {
+                message.success(`成功添加 ${addCount} 台设备`);
+
+                getList();
+              });
+          });
+      }
+    };
+
     return {
       columns,
       show,
@@ -174,6 +192,7 @@ export default defineComponent({
       getScene,
       loading,
       list2,
+      onUploadChange,
     };
   },
 

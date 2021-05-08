@@ -34,9 +34,9 @@ export const update = (data={}) => {
     data,
   );
 };
-// export const login = (account,password) => {
-//   return axios.post('http://localhost:3000/auth/login', {
-//     account,
-//     password,
-//   });
-// };
+
+export const addMany = (key) => {
+  return axios.post('http://localhost:3000/facility/addMany', {
+      key,
+  });
+};

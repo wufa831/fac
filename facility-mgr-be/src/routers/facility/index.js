@@ -1,8 +1,13 @@
 const Router = require('@koa/router');
 const mongoose = require('mongoose');
+const config = require('../../project.config');
 const {getBody } = require('../../helpers/utils');
+const { loadExcel, getFirstSheet } = require('../../helpers/excel');
+const xlsx = require('node-xlsx');
+
 
 const Facility= mongoose.model('Facility');
+
 
 const router = new Router({
   prefix: '/facility',
@@ -131,6 +136,60 @@ router.post('/update', async (ctx) => {
     msg:'修改成功',
     code: 1,
   };
-
 });
+
+router.post('/addMany' , async(ctx) => {
+  const {
+    key = '',
+  } = ctx.request.body;
+ 
+const path = `${config.UPLOAD_DIR}/${key}`;
+ 
+const excel = loadExcel(path);
+ 
+const sheet = getFirstSheet(excel);
+ 
+
+ const arr = [];
+  for (let i = 0; i < sheet.length; i++) {
+    let record = sheet[i];
+
+    const [
+      vendor,
+      IMEI,
+      ICCID,
+      SN,
+      custom,
+      state,
+      scene,
+      area,
+      activeTime,
+    ] = record;
+
+    arr.push({
+      vendor,
+      IMEI,
+      ICCID,
+      SN,
+      custom,
+      state,
+      scene,
+      area,
+      activeTime,
+    });
+  }
+ 
+  await Facility.insertMany(arr);
+ 
+  ctx.body = {
+    code:1,
+    msg: '添加成功',
+    data: {
+      addCount: arr.length,
+    },
+  };
+ 
+});
+
+
 module.exports = router;
