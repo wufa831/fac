@@ -30,6 +30,11 @@ export default [
     onlyAdmin:false,
   },
   {
+    title: '预警管理',
+    url: '/warning',
+    onlyAdmin:false,
+  },
+  {
     title: '日志列表',
     url: '/log',
     onlyAdmin:true,

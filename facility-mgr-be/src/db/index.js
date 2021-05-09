@@ -10,6 +10,7 @@ require('./Schemas/Character');
 require('./Schemas/Log');
 require('./Schemas/LogResponse');
 require('./Schemas/ForgetPassword');
+require('./Schemas/Warning');
 
 const connect = async () => {
   return new Promise((resolve) => {
