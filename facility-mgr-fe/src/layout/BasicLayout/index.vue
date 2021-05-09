@@ -8,9 +8,9 @@
       </div>
       <div class="right1">
         <div class="hello-msg">
-          你好，xx
+          你好，{{ store.userInfo.account }}
         </div>
-        <div class="logout">退出</div>
+        <div class="logout" @click="logout">退出</div>
       </div>
     </div>
     <div class="app-header-placeholder"></div>

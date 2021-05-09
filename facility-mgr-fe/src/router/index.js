@@ -1,5 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import store from '@/store';
+import { message } from 'ant-design-vue';
+import { user } from '@/service';
 
 
 const routes = [
@@ -11,6 +13,7 @@ const routes = [
   {
     path: '/',
     name: 'BasicLayout',
+    redirect:'/auth',
     component: () => import(/* webpackChunkName: "BasicLayout " */ '../layout/BasicLayout/index.vue'),
     children: [//router-view子路由 渲染到BasicLayout
       {
@@ -74,6 +77,34 @@ const router = createRouter({
 
 
 router.beforeEach(async (to, from, next) => {
+  `
+  清除token后页面会白屏：进入页面之前会先获取角色信息，不在登录状态下去取会401，不做处理会中断不做next
+  `
+  
+
+  let res = {};
+
+  try {
+    res = await user.info();//获取信息 如果报错是401则取到res code
+  } catch (e) {
+    if (e.message.includes('code 401')) {
+      res.code = 401;
+    }
+  }
+
+  const { code } = res;
+
+  if (code === 401) {
+    if (to.path === '/auth') {
+      next();
+      return;
+    }
+    message.error('认证失败，请重新登陆');
+    next('/auth');
+    return;
+  }
+
+
   
 
   if (!store.state.characterInfo.length) {

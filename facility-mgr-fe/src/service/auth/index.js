@@ -1,7 +1,8 @@
-import axios from 'axios';
+// import { del, post, get } from '@/helpers/request';
+import { del, post, get } from '@/helpers/request';
 
 export const register = (account,password,inviteCode) => {
-  return axios.post('http://localhost:3000/auth/register', {//返回的是promise
+  return post('/auth/register', {//返回的是promise
     account,
     password,
     inviteCode,
@@ -9,7 +10,7 @@ export const register = (account,password,inviteCode) => {
 };
 
 export const login = (account,password) => {
-  return axios.post('http://localhost:3000/auth/login', {
+  return post('/auth/login', {
     account,
     password,
   });

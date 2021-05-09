@@ -1,4 +1,4 @@
-import { defineComponent,reactive } from 'vue';
+import { defineComponent,reactive,ref } from 'vue';
 import { facility } from '@/service';
 import { message } from 'ant-design-vue';
 import { result,clone } from '@/helpers/utils';
@@ -25,11 +25,12 @@ export default defineComponent({
 
   props: {
     show: Boolean,
-    statelist:Array,
+    statelist: Array,
+    vendorlist: Array,
   },
 
   setup(props,context) {//在组件初始化时执行
-
+    const arealist = ref(['东区局','南区局','西区局','北区局','中区局', '金山区局','嘉定区局']);
     const addForm = reactive(clone(defaultFormdata));//生拷贝防止reactive对数据产生影响
 
     const submit = async () => {
@@ -56,6 +57,7 @@ export default defineComponent({
       submit,
       props,
       close,
+      arealist,
     };
   },
 });

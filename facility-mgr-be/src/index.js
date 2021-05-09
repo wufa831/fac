@@ -3,7 +3,7 @@ const koaBody = require('koa-body');
 const { connect } = require('./db');
 const registerRoutes = require('./routers');
 const cors = require('@koa/cors');
-const { middleware: koaJwtMiddleware,catchTokenError } = require('./helpers/token');
+const { middleware: koaJwtMiddleware,catchTokenError,checkUser } = require('./helpers/token');
 //解决跨域问题 在http请求头上加上标志
 const { logMiddleware } = require('./helpers/log');
 const config = require('./project.config');
@@ -19,10 +19,10 @@ connect().then(() => {//注册中间件
     },//文件限制200M
   })); //请求体
   
-  // app.use(catchTokenError);
+  app.use(catchTokenError);//捕获koaJwtMiddleware如果出错
 
-  // koaJwtMiddleware(app);
-
+  koaJwtMiddleware(app);
+  app.use(checkUser);
   app.use(logMiddleware);
 
   registerRoutes(app);//注册路由

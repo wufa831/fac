@@ -101,15 +101,15 @@ export default defineComponent({
 
       const res= await auth.login(loginForm.account, loginForm.password);//解构方式拿到res.data
       result(res)
-        .success(({msg,data:{user,token}}) => {
+        .success(async({msg,data:{user,token}}) => {
           message.success(msg);
-
-
+          setToken(token);
+          await store.dispatch('getCharacterInfo');
           store.commit('setUserInfo', user);
           
           store.commit('setUserCharacter', getCharacterInfoById(user.character));
 
-          setToken(token);
+          
 
           router.replace('/facilities');
         });

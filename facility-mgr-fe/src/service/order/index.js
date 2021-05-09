@@ -1,26 +1,24 @@
-import axios from 'axios';
+import { del, post, get } from '@/helpers/request';
 
 export const list = (data) => {
-  return axios.get('http://localhost:3000/order/list',
-    {//返回的是promise
-      params:data,
-    },
+  return get('/order/list',
+    data,
   );
 };
 
 export const add = (form) => {
-  return axios.post(
-    'http://localhost:3000/order/add', 
+  return post(
+    '/order/add', 
     form,
   );
 };
 
 export const remove = (id) => {
-  return axios.delete(`http://localhost:3000/order/${id}`);
+  return del(`/order/${id}`);
 };
 
 export const update = (data={}) => {
-  return axios.post('http://localhost:3000/order/update', 
+  return post('/order/update', 
     data,
   );
 };

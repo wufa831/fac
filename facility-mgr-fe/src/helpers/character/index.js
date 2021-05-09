@@ -2,7 +2,7 @@ import store from '@/store';
 
 export const isAdmin = () => {
   const uc = store.state.userCharacter;
-  console.log(uc);
+  // console.log(uc);
   return uc.name === 'admin';
   
 };

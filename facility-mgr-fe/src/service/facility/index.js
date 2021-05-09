@@ -1,42 +1,36 @@
-import axios from 'axios';
-import { getToken } from '@/helpers/token';
-
-axios.defaults.headers['Authorization'] = `Bearer ${getToken()}`;
+import { del, post, get } from '@/helpers/request';
 
 
 export const add = (form) => {
-  return axios.post(
-    'http://localhost:3000/facility/add',
+  return post(
+    '/facility/add',
     form,
   );
 };
 
 export const list = (data) => {
-  return axios.get(
-    'http://localhost:3000/facility/list',
-    {
-      params: data,
-      
-    },
+  return get(
+    '/facility/list',
+    data,
   );
 };
 
 export const remove = (id) => {
-  return axios.post(
-    'http://localhost:3000/facility/delete', {
+  return post(
+    '/facility/delete', {
       id,
     }
   );
 };
 
 export const update = (data={}) => {
-  return axios.post('http://localhost:3000/facility/update', 
+  return post('/facility/update', 
     data,
   );
 };
 
 export const addMany = (key) => {
-  return axios.post('http://localhost:3000/facility/addMany', {
+  return post('/facility/addMany', {
       key,
   });
 };

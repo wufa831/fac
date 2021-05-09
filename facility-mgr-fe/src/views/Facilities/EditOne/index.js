@@ -1,4 +1,4 @@
-import { defineComponent,reactive,watch } from 'vue';
+import { defineComponent,reactive,watch,ref } from 'vue';
 import { facility } from '@/service';
 import { message } from 'ant-design-vue';
 import { result, clone } from '@/helpers/utils';
@@ -9,8 +9,10 @@ export default defineComponent({
     show: Boolean,
     facility: Object,
     statelist: Array,
+    vendorlist: Array,
   },
   setup(props, context) {
+    const arealist = ref(['东区局','南区局','西区局','北区局','中区局', '金山区局','嘉定区局']);
 
     const editForm = reactive({
       vendor: '',
@@ -64,6 +66,7 @@ export default defineComponent({
       submit,
       props,
       close,
+      arealist,
 
     };
   },

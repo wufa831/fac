@@ -16,7 +16,8 @@ export default defineComponent({
   },
 
   setup(props,context) {//在组件初始化时执行
-    const { characterInfo } = store.state; 
+    const { characterInfo } = store.state;
+    // console.log(characterInfo);
     
     const addForm = reactive(clone(defaultFormdata));//生拷贝防止reactive对数据产生影响
 

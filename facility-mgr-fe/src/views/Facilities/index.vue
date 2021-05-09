@@ -34,7 +34,7 @@
         <a-upload
             @change="onUploadChange"
             action="http://localhost:3000/upload/file"
-
+            :headers="headers"
         >
           <!-- :headers="headers" -->
             <a-button type="primary">上传 Excel 添加</a-button>
@@ -78,12 +78,14 @@
       v-model:show="show"
       @getList="getList"
       :statelist="list2"
+      :vendorlist="list3"
     />
     <edit-one
       v-model:show="showedit"
       :facility="curFacility"
       @update="updatecurFacility"
       :statelist="list2"
+      :vendorlist="list3"
     />
   </div>
 </template>

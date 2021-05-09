@@ -9,7 +9,18 @@
  <!-- :visible="props.show" -->
     <a-form :label-col="{span:6}" :wrapper-col="{span:16}">
       <a-form-item label="设备厂商">
-        <a-input v-model:value="editForm.vendor" />
+        <a-select
+          v-model:value="editForm.vendor"
+          style="width: 120px"
+        >
+          <a-select-option 
+            v-for="item in vendorlist"
+            :key="item"
+            :value="item"
+
+          >{{item}}</a-select-option>
+
+        </a-select>
       </a-form-item>
       <a-form-item label="IMEI">
         <a-input v-model:value="editForm.IMEI" />
@@ -40,8 +51,19 @@
 
         </a-select>
       </a-form-item>
-      <a-form-item label="安装行政区">
-        <a-input v-model:value="editForm.area" />
+      <a-form-item label="安装区局">
+        <a-select
+          v-model:value="editForm.area"
+          style="width: 120px"
+        >
+          <a-select-option 
+            v-for="item in arealist"
+            :key="item"
+            :value="item"
+
+          >{{item}}</a-select-option>
+
+        </a-select>
       </a-form-item>
       <a-form-item  label="激活时间">
         <!-- <a-space direction="vertical"> -->

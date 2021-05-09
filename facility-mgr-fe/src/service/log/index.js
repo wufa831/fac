@@ -1,12 +1,12 @@
-import axios from 'axios';
+import { del, post, get } from '@/helpers/request';
 
 export const list = (page,size) => {
-  return axios.get(
-    'http://localhost:3000/log/list', {
-      params: {
+  return get(
+    '/log/list', {
+      
         page,
         size,
-      }
+      
     });
 };
 
