@@ -5,27 +5,43 @@
       <h2>操作日志</h2>
 
       <a-divider/>
-      
       <space-between>
-       <div class="search">
-        <a-input-search
-         placeholder="根据场景名称搜索"
-         enter-button
-         v-model:value="keyword1"
-         @search="onSearch"
-       />
-       <a-input-search
-         placeholder="根据场景类型搜索"
-         enter-button
-         v-model:value="keyword2"
-         @search="onSearch"
-       />
+        <a-row class="row" type="flex">
+          <a-col :flex="5">
+            <a-input-search
+              placeholder="根据用户名搜索"
+              enter-button
+              v-model:value="keyword1"
+              @search="onSearch"
+            />
+          </a-col>
+          <a-col :flex="1"></a-col>
+          <a-col :flex="4">
+            <a-select
+              v-model:value="keyword2"
+              style="width: 280px"
+              @change="handleChange"
+            >
+              <a-select-option 
+                v-for="item in LOG_MAP"
+                :key="item[1]"
+                :value="item[0]"
 
-       <a v-if="isSearch" href="javascript:;" @click="backAll">返回</a>
-       </div>
-      
+
+              >{{item[1]}}</a-select-option>
+
+            </a-select>
+          </a-col>
+          
+        </a-row>
+
        
-      </space-between>
+       
+      
+       <a v-show="isSearch" href="javascript:;" @click="backAll">返回</a>
+       <div class="ban">
+       </div>
+     </space-between>
 
       <a-divider/>
 

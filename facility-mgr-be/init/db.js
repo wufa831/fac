@@ -12,3 +12,7 @@ connect()
     await Character.insertMany(defaultCharacters);
     console.log('角色集合初始化完成');
   });
+
+`
+角色表应该在系统初始化时就进行注册
+`

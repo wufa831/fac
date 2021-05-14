@@ -1,7 +1,7 @@
-const LOG_MAP = [
+export const LOG_MAP = [
   ['/character/list', '获取角色列表'],
   ['/log/list', '获取日志列表'],
-  ['/user/info', '获取自己的登入信息'],
+  ['/user/info', '获取自己的登录信息'],
   ['/facility/list', '获取设备列表'],
   ['/state/list', '获取场景列表'],
   ['/vendor/list', '获取供应商列表'],
@@ -12,6 +12,7 @@ const LOG_MAP = [
   ['/auth/register', '注册'],
   ['/profile/update/password', '修改密码'],
   ['/forget-password/list', '获取重置密码列表'],
+  ['/warning', '获取预警列表'],
 
 ];
 

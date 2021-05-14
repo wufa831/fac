@@ -22,3 +22,8 @@ export const update = (data={}) => {
     data,
   );
 };
+
+export const warningcount = () => {
+  return post('/warning/count'
+  );
+};

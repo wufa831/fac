@@ -85,10 +85,11 @@ export default defineComponent({
           };
         });
     };
+    // console.log(list2);
     const getVendor = async () => {
       
       const res2 = await vendor.list();
-      console.log(res2);
+      // console.log(res2);
       
       result(res2)
         .success(({ data }) => {

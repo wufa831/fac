@@ -17,6 +17,19 @@
       <a-form-item label="处理">
         <a-input v-model:value="addForm.todo" />
       </a-form-item>
+      <a-form-item label="区局">
+        <a-select
+          v-model:value="addForm.area"
+          style="width: 120px"
+        >
+          <a-select-option 
+            v-for="item in arealist"
+            :key="item"
+            :value="item"
+
+          >{{item}}</a-select-option>
+        </a-select>
+        </a-form-item>
       
     </a-form>
     </a-modal>

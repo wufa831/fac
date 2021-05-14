@@ -45,6 +45,20 @@ export const formatTimestamp = (ts) => {
 
 };
 
+export const getmonth = (ts) => {
+  const date = new Date(Number(ts));
+  const YYYY = date.getFullYear();
+  const MM = date.getMonth() + 1;
+  const DD = date.getDate();
+
+  const hh = date.getHours();
+  const mm = date.getMinutes();
+  const ss = date.getSeconds();
+
+  return MM;
+
+};
+
 export const orderkind = (val) => {
   return ['CRM订单','自建订单'][val];
 };

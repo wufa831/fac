@@ -17,6 +17,7 @@
           </div>
         </div>
       </a-card>
+
     </a-spin>
 
   </div>

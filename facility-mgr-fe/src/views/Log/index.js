@@ -1,7 +1,8 @@
-import { defineComponent, ref,onMounted } from 'vue';
+import { defineComponent, ref,onMounted,watch } from 'vue';
 import { message } from 'ant-design-vue';
 import { log } from '@/service';
-import { result,formatTimestamp } from '@/helpers/utils';
+import { result, formatTimestamp } from '@/helpers/utils';
+import { LOG_MAP } from '@/helpers/log';
 import { getLogInfoByPath } from '@/helpers/log';
 export default defineComponent({
   components: {
@@ -47,7 +48,9 @@ export default defineComponent({
       const res = await log.list(
         curPage.value,
         20,
-        // keyword1: keyword1.value,
+        keyword1.value,
+        keyword2.value
+        // keyword1:keyword1.value,
         // keyword2:keyword2.value,
       );
       loading.value = false;
@@ -60,6 +63,29 @@ export default defineComponent({
           total.value = t;
         });
     }
+
+    const handleChange =async () => {
+      const res = await log.list(
+        curPage.value,
+        20,
+        keyword1.value,
+        keyword2.value
+      );
+      
+      result(res)
+        .success(({ data:{list: l, total: t} }) => {
+          l.forEach((item) => {
+            item.action = getLogInfoByPath(item.request.url);
+          });
+          list.value = l;
+          total.value = t;
+          isSearch.value = true;
+        });
+    };
+
+    // watch(() => keyword2, () => {//监听响应式数据的变化，current危改变后的数据，然后将两个表合并
+    //   getList();
+    // });
 
     onMounted(async() => {
       getList();
@@ -84,7 +110,7 @@ export default defineComponent({
     };
 //删除一个设备
 
-
+    
 
  
     return {
@@ -104,6 +130,10 @@ export default defineComponent({
       isSearch,
 
       formatTimestamp,
+
+      LOG_MAP,
+
+      handleChange,
 
     };
   },

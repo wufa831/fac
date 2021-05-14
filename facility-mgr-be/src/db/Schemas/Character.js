@@ -15,3 +15,7 @@ const CharacterSchema = new mongoose.Schema({
 CharacterSchema.pre('save', preSave);
 
 mongoose.model('Character', CharacterSchema);
+
+`
+通过找_id找到角色，power 根据power隐藏显示按钮，并对接口做出限制
+`

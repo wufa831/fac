@@ -12,7 +12,7 @@ export default defineComponent({
     vendorlist: Array,
   },
   setup(props, context) {
-    const arealist = ref(['东区局','南区局','西区局','北区局','中区局', '金山区局','嘉定区局']);
+    const arealist = ref(['黄浦区局','徐汇区局','长宁区局','静安区局','普陀区局','虹口区局','杨浦区局','闵行区局','宝山区局','嘉定区局','金山区局','松江区局','青浦区局','奉贤区局','崇明区局','浦东新区区局']);
 
     const editForm = reactive({
       vendor: '',

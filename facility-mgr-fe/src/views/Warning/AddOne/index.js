@@ -1,4 +1,4 @@
-import { defineComponent,reactive } from 'vue';
+import { defineComponent,reactive,ref } from 'vue';
 import { warning } from '@/service';
 import { message } from 'ant-design-vue';
 import { result,clone } from '@/helpers/utils';
@@ -26,7 +26,7 @@ export default defineComponent({
   },
 
   setup(props,context) {//在组件初始化时执行
-
+    const arealist = ref(['黄浦区局','徐汇区局','长宁区局','静安区局','普陀区局','虹口区局','杨浦区局','闵行区局','宝山区局','嘉定区局','金山区局','松江区局','青浦区局','奉贤区局','崇明区局','浦东新区区局']);
     const addForm = reactive(clone(defaultFormdata));//生拷贝防止reactive对数据产生影响
     
     const submit = async () => {
@@ -54,6 +54,7 @@ export default defineComponent({
       submit,
       props,
       close,
+      arealist,
      
     };
   },

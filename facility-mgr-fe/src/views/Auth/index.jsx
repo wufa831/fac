@@ -111,7 +111,7 @@ export default defineComponent({
 
           
 
-          router.replace('/facilities');
+          router.replace('/dashboard');
         });
     };
 

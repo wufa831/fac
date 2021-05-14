@@ -58,6 +58,33 @@ router.post('/add', async (ctx) => {//拿到前端提交上来的，放在数据
   };
 });
 
+router.post('/count', async (ctx) => {//拿到前端提交上来的，放在数据库里
+  
+  const list = await Warning.find().exec();
+  const total = await Warning.countDocuments();
+  let arealist = ['黄浦区局', '徐汇区局', '长宁区局', '静安区局', '普陀区局', '虹口区局', '杨浦区局', '闵行区局', '宝山区局', '嘉定区局', '金山区局', '松江区局', '青浦区局', '奉贤区局', '崇明区局', '浦东新区区局'];
+  let countlist = [];
+  for (let j = 0; j < arealist.length; j++){
+    let sum = 0;
+    for (let i = 0; i < total; i++) {
+      if (list[i].area == arealist[j]) {
+        sum = sum + 1;
+        countlist[j] = sum; 
+      }
+
+    };
+  };
+
+ console.log(countlist);
+
+
+  ctx.body = {
+    data:countlist,
+    code:1,
+    msg:'添加成功',
+  };
+});
+
 router.get('/list', async (ctx) => {    //获取所有列表作出响应
   
   const {

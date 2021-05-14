@@ -23,6 +23,7 @@ export default createStore({
   actions: {//拿数据
     async getCharacterInfo(store) {
       const res = await character.list();
+      // console.log(res);
 
       result(res)
         .success(({ data }) => {

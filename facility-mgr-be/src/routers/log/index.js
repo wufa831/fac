@@ -12,20 +12,31 @@ router.get('/list', async (ctx) => {
   let {
     page,
     size,
+    keyword1 = '',
+    keyword2 = '',
   } = ctx.query;
 
   page = Number(page);
   size = Number(size);
 
+
+  let query = {};
+  if (keyword1) {
+    query = { 'user.account': {$regex:keyword1} };
+  }
+  if (keyword2) {
+    query = { 'request.url': {$regex:keyword2} };
+  }
   const list = await Log
-    .find()
-    .sort({
-      _id:-1,//由新到旧排列
-    })
-    .skip((page - 1) * size)//分页
-    .limit(size)
-    .exec();
-  
+  .find(query)
+  .sort({
+    _id:-1,//由新到旧排列
+  })
+  .skip((page - 1) * size)//分页
+  .limit(size)
+  .exec();
+
+ 
   const total = await Log.countDocuments();
   
   ctx.body = {

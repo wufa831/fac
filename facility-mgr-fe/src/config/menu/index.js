@@ -10,11 +10,6 @@ export default [
     onlyAdmin:false,
   },
   {
-    title: '用户管理',
-    url: '/user',
-    onlyAdmin:true,
-  },
-  {
     title: '订单管理',
     url: '/order',
     onlyAdmin:false,
@@ -31,8 +26,24 @@ export default [
   },
   {
     title: '预警管理',
-    url: '/warning',
-    onlyAdmin:false,
+    onlyAdmin: false,
+    children: [
+      {
+        title: '预警处理',
+        url: '/warning',
+        onlyAdmin:false,
+      },
+      {
+        title: '预警统计',
+        url: '/warninglog',
+        onlyAdmin:false,
+      },
+    ]
+  },
+  {
+    title: '用户管理',
+    url: '/user',
+    onlyAdmin:true,
   },
   {
     title: '日志列表',
