@@ -4,7 +4,11 @@ export const isAdmin = () => {
   const uc = store.state.userCharacter;
   // console.log(uc);
   return uc.name === 'admin';
-  
+};
+
+export const isSuperAdmin = () => {
+  const uc = store.state.userCharacter;
+  return uc.name === 'superadmin';
 };
 
 export const getCharacterInfoById = (id) => {

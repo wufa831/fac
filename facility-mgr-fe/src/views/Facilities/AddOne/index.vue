@@ -35,7 +35,6 @@
         <a-input v-model:value="addForm.custom" />
       </a-form-item>
       <a-form-item label="设备状态">
-        <a-input v-model:value="addForm.state" />
         <a-select
           v-model:value="addForm.state"
           style="width: 120px"

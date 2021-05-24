@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div>    
     <a-menu
     style="width: 217px"
     v-model:openKeys="openKeys"
@@ -7,16 +7,16 @@
     mode="inline"
     v-for="(item) in menu" 
     :key="item.url"
+    v-only-super-admin="item.onlySuperAdmin"
     v-only-admin="item.onlyAdmin"
     >
+      <!-- v-only-admin="item.onlyAdmin" -->
+    <!-- v-only-superadmin="item.onlySuperAdmin" -->
       <a-sub-menu 
       v-if="item.children"
       >
         <template #title>
-          <span>
-            <MailOutlined />
             <span>{{item.title}}</span>
-          </span>
         </template>
           <a-menu-item
           @click="to(child.url)"

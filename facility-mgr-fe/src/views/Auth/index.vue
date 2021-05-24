@@ -3,12 +3,12 @@
     <!-- <div class="dg"></div> -->
     <div class="title-info">
       <img src="" alt="">
-      <div class="title">Login</div>
+      <div class="title">门磁设备管理运营平台</div>
     </div>
 
     <div class="form">
       <a-tabs>
-      <a-tab-pane size="large" tab="登入" key="1">
+      <a-tab-pane size="large" tab="登录" key="1">
 
         <div class="item">
          <a-input

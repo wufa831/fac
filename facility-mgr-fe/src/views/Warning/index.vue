@@ -41,7 +41,7 @@
             用法：例如，表格行中有一个属性是name，那么，我要拿到这个每一行name的值，我就可以用过record.name来拿到 -->
             <a href="javascript:;" @click="update(record); showedit = true;">处理</a>
             &nbsp;
-            <a href="javascript:;" @click="remove(record)">删除</a>
+            <a v-only-admin href="javascript:;" @click="remove(record)">删除</a>
             <br/>
             <a href="javascript:;" @click="warnlog(record)">查看备注</a>
          </template>

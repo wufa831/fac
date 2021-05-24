@@ -35,7 +35,18 @@
         <a-input v-model:value="editForm.custom" />
       </a-form-item>
       <a-form-item label="设备状态">
-        <a-input v-model:value="editForm.state" />
+        <a-select
+          v-model:value="editForm.state"
+          style="width: 120px"
+        >
+          <a-select-option 
+            v-for="item in activelist"
+            :key="item"
+            :value="item"
+
+          >{{item}}</a-select-option>
+
+        </a-select>
       </a-form-item>
       <a-form-item label="场景属性">
         <a-select

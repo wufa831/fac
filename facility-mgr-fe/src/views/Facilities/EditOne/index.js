@@ -13,7 +13,7 @@ export default defineComponent({
   },
   setup(props, context) {
     const arealist = ref(['黄浦区局','徐汇区局','长宁区局','静安区局','普陀区局','虹口区局','杨浦区局','闵行区局','宝山区局','嘉定区局','金山区局','松江区局','青浦区局','奉贤区局','崇明区局','浦东新区区局']);
-
+    const activelist = ref(['激活', '未激活', '弃用']);
     const editForm = reactive({
       vendor: '',
       IMEI: '',
@@ -67,6 +67,7 @@ export default defineComponent({
       props,
       close,
       arealist,
+      activelist,
 
     };
   },

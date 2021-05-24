@@ -143,12 +143,12 @@ router.post('/addMany' , async(ctx) => {
     key = '',
   } = ctx.request.body;
  
-const path = `${config.UPLOAD_DIR}/${key}`;
- 
-const excel = loadExcel(path);
- 
-const sheet = getFirstSheet(excel);
- 
+  const path = `${config.UPLOAD_DIR}/${key}`;
+  
+  const excel = loadExcel(path);
+  
+  const sheet = getFirstSheet(excel);
+  
 
  const arr = [];
   for (let i = 0; i < sheet.length; i++) {

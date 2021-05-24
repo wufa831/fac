@@ -21,7 +21,7 @@ export default defineComponent({
     
     const addForm = reactive(clone(defaultFormdata));//生拷贝防止reactive对数据产生影响
 
-    addForm.character = characterInfo[1]._id;
+    addForm.character = characterInfo[2]._id;
     const close = () => {
       context.emit('update:show', false);//emit用来触发自定义事件]
       //v-model双向绑定show的值 update更新show的值为false

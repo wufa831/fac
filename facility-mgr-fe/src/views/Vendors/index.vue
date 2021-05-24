@@ -37,7 +37,7 @@
             <!-- <a href="javascript:;" @click="showedit=true">编辑</a> -->
             <a href="javascript:;" @click="update(record); showedit = true;">编辑</a>
             &nbsp;
-            <a href="javascript:;" @click="remove(record)">删除</a>
+            <a v-only-admin href="javascript:;" @click="remove(record)">删除</a>
             
          </template>
        </a-table>

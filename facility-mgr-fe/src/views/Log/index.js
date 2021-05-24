@@ -83,9 +83,6 @@ export default defineComponent({
         });
     };
 
-    // watch(() => keyword2, () => {//监听响应式数据的变化，current危改变后的数据，然后将两个表合并
-    //   getList();
-    // });
 
     onMounted(async() => {
       getList();

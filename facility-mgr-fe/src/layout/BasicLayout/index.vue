@@ -3,7 +3,7 @@
     <div class="app-header">
       <div class="left1">
         <div class="title">
-          门磁设备管理系统
+          门磁设备管理运营平台
         </div>
       </div>
       <div class="right1">

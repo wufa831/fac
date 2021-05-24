@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-spin :spinning="loading">
-    <a-card>
+    <a-card v-only-super-admin>
       <h2>操作日志</h2>
 
       <a-divider/>
@@ -22,6 +22,7 @@
               style="width: 280px"
               @change="handleChange"
             >
+            
               <a-select-option 
                 v-for="item in LOG_MAP"
                 :key="item[1]"
