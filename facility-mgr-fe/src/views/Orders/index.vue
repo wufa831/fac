@@ -40,7 +40,12 @@
             用法：例如，表格行中有一个属性是name，那么，我要拿到这个每一行name的值，我就可以用过record.name来拿到 -->
             <a href="javascript:;" @click="update(record); showedit = true;">编辑</a>
             &nbsp;
-            <a v-only-admin href="javascript:;" @click="remove(record)">删除</a>
+            <a-popconfirm
+              title="确认删除？"
+              @confirm="remove(record)"
+            >
+            <a v-only-admin>删除</a>
+            </a-popconfirm>
          </template>
        </a-table>
        <space-between

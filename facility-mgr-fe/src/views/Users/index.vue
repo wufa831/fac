@@ -39,7 +39,12 @@
           <template #actions="{record}">
             <a href="javascript:;" @click="resetPassword(record)">重置密码</a>
             &nbsp;
-            <a href="javascript:;" @click="remove(record)">删除</a>
+            <a-popconfirm
+              title="确认删除？"
+              @confirm="remove(record)"
+            >
+            <a>删除</a>
+            </a-popconfirm>
           </template>
         </a-table>
       </div>

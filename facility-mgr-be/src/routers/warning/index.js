@@ -104,6 +104,9 @@ router.get('/list', async (ctx) => {    //获取所有列表作出响应
   }
   const list = await Warning
     .find(query)
+    .sort({
+      _id:-1,//由新到旧排列
+    })
     .skip((page - 1) * size)//分页
     .limit(size)
     .exec();

@@ -37,8 +37,12 @@
             <!-- <a href="javascript:;" @click="showedit=true">编辑</a> -->
             <a href="javascript:;" @click="update(record); showedit = true;">编辑</a>
             &nbsp;
-            <a v-only-admin href="javascript:;" @click="remove(record)">删除</a>
-            
+            <a-popconfirm
+              title="确认删除？"
+              @confirm="remove(record)"
+            >
+            <a v-only-admin>删除</a>
+            </a-popconfirm>
          </template>
        </a-table>
        <space-between
